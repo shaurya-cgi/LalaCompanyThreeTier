@@ -3,6 +3,7 @@ using LalaCompanyThreeTier.Interfaces;
 using LalaCompanyThreeTier.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using LalaCompanyThreeTier.Dtos.Buyer;
 
 namespace LalaCompanyThreeTier.Services
 {
@@ -23,8 +24,21 @@ namespace LalaCompanyThreeTier.Services
         {
             return await _appDbContext.Buyers.FirstOrDefaultAsync(b => b.Id == id);
         }
-        public async Task<Buyer?> CreateBuyer(Buyer buyer)
+        public async Task<Buyer> CreateBuyer(CreateBuyerDto dto)
         {
+            var buyer = new Buyer
+            {
+                PartyName = dto.PartyName,
+                Gstin = dto.Gstin,
+                Mobile = dto.Mobile,
+                Email = dto.Email,
+                BillingAddress = dto.BillingAddress,
+                State = dto.State,
+                City = dto.City,
+                PinCode = dto.PinCode,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
             _appDbContext.Buyers.Add(buyer);
             await _appDbContext.SaveChangesAsync();
             return buyer;
@@ -40,16 +54,16 @@ namespace LalaCompanyThreeTier.Services
             await _appDbContext.SaveChangesAsync();
             return existingBuyer;
         }
-        public async Task<Buyer> DeleteBuyer(int id)
+        public async Task<Buyer?> DeleteBuyer(int id)
         {
             var buyer = await _appDbContext.Buyers.FindAsync(id);
             if (buyer != null)
             {
-                _appDbContext.Buyers.Remove(buyer);
-                await _appDbContext.SaveChangesAsync();
-                return buyer;
+                return null;
             }
-            return null;
+            _appDbContext.Buyers.Remove(buyer);
+            await _appDbContext.SaveChangesAsync();
+            return buyer;
         }
     }
 }

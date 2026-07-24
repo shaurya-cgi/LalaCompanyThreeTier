@@ -1,4 +1,5 @@
-﻿using LalaCompanyThreeTier.Models;
+﻿using LalaCompanyThreeTier.Dtos.Buyer;
+using LalaCompanyThreeTier.Models;
 
 namespace LalaCompanyThreeTier.Interfaces
 {
@@ -6,9 +7,9 @@ namespace LalaCompanyThreeTier.Interfaces
     {
         Task<List<Buyer>> GetAllBuyers();
         Task<Buyer?> GetBuyerById(int id);
-        Task<Buyer?> CreateBuyer(Buyer Buyer);
+        Task<Buyer> CreateBuyer(CreateBuyerDto Buyer);
         Task<Buyer?> UpdateBuyer(int id, Buyer Buyer);
-        Task<Buyer> DeleteBuyer(int id);
+        Task<Buyer?> DeleteBuyer(int id);
 
     }
 }

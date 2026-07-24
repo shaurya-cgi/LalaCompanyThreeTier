@@ -15,6 +15,7 @@ public partial class Buyer
 
     [Column("partyName")]
     [StringLength(255)]
+    [Required]
     public string? PartyName { get; set; }
 
     [Column("gstin")]

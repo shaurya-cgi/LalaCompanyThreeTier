@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LalaCompanyThreeTier.Models;
 using LalaCompanyThreeTier.Data;
+using LalaCompanyThreeTier.Dtos.Buyer;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -62,11 +63,25 @@ public class BuyersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Buyer>> PostBuyer(Buyer buyer)
+    public async Task<ActionResult<Buyer>> PostBuyer(CreateBuyerDto createBuyerDto)
     {
+        var buyer = new Buyer
+        {
+            PartyName = createBuyerDto.PartyName,
+            Gstin = createBuyerDto.Gstin,
+            Mobile = createBuyerDto.Mobile,
+            Email = createBuyerDto.Email,
+            BillingAddress = createBuyerDto.BillingAddress,
+            State = createBuyerDto.State,
+            City = createBuyerDto.City,
+            PinCode = createBuyerDto.PinCode,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
         _context.Buyers.Add(buyer);
         await _context.SaveChangesAsync();
-
+        
         return CreatedAtAction("GetBuyer", new { id = buyer.Id }, buyer);
     }
 
