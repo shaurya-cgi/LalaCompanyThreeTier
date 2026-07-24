@@ -1,0 +1,6 @@
+@LalaCompanyThreeTier_HostAddress = http://localhost:5104
+
+GET {{LalaCompanyThreeTier_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
