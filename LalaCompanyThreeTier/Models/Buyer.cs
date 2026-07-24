@@ -44,9 +44,6 @@ public partial class Buyer
     [StringLength(255)]
     public string? PinCode { get; set; }
 
-    [Column("isActive")]
-    public bool? IsActive { get; set; }
-
     [Column("createdAt", TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
 

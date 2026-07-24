@@ -38,7 +38,6 @@ public partial class AppDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__buyers__3213E83F457F0B74");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<BuyerProductPrice>(entity =>
@@ -91,7 +90,6 @@ public partial class AppDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__products__3213E83F52DEA98E");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products).HasConstraintName("FK__products__catego__38996AB5");
         });

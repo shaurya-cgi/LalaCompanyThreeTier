@@ -26,9 +26,6 @@ public partial class Product
     [Column("GSTRate", TypeName = "decimal(18, 2)")]
     public decimal? Gstrate { get; set; }
 
-    [Column("isActive")]
-    public bool? IsActive { get; set; }
-
     [Column("createdAt", TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
 
