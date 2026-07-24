@@ -23,13 +23,13 @@ public partial class Invoice
     [Column("invoiceDate")]
     public DateOnly? InvoiceDate { get; set; }
 
-    [Column("subtotal", TypeName = "decimal(18, 0)")]
+    [Column("subtotal", TypeName = "decimal(18, 2)")]
     public decimal? Subtotal { get; set; }
 
-    [Column("gstAmount", TypeName = "decimal(18, 0)")]
+    [Column("gstAmount", TypeName = "decimal(18, 2)")]
     public decimal? GstAmount { get; set; }
 
-    [Column("totalAmount", TypeName = "decimal(18, 0)")]
+    [Column("totalAmount", TypeName = "decimal(18, 2)")]
     public decimal? TotalAmount { get; set; }
 
     [Column("pdfPath")]

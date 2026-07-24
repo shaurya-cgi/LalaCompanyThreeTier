@@ -20,10 +20,10 @@ public partial class Product
     [StringLength(255)]
     public string? ModelName { get; set; }
 
-    [Column("defaultPrice", TypeName = "decimal(18, 0)")]
+    [Column("defaultPrice", TypeName = "decimal(18, 2)")]
     public decimal? DefaultPrice { get; set; }
 
-    [Column("GSTRate", TypeName = "decimal(18, 0)")]
+    [Column("GSTRate", TypeName = "decimal(18, 2)")]
     public decimal? Gstrate { get; set; }
 
     [Column("isActive")]

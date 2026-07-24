@@ -19,7 +19,7 @@ public partial class BuyerProductPrice
     [Column("productId")]
     public int? ProductId { get; set; }
 
-    [Column("rate", TypeName = "decimal(18, 0)")]
+    [Column("rate", TypeName = "decimal(18, 2)")]
     public decimal? Rate { get; set; }
 
     [Column("createdAt", TypeName = "datetime")]

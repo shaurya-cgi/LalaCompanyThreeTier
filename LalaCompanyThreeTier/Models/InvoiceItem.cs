@@ -26,19 +26,19 @@ public partial class InvoiceItem
     [Column("qty")]
     public int? Qty { get; set; }
 
-    [Column("rate", TypeName = "decimal(18, 0)")]
+    [Column("rate", TypeName = "decimal(18, 2)")]
     public decimal? Rate { get; set; }
 
-    [Column("amount", TypeName = "decimal(18, 0)")]
+    [Column("amount", TypeName = "decimal(18, 2)")]
     public decimal? Amount { get; set; }
 
-    [Column("gstRate", TypeName = "decimal(18, 0)")]
+    [Column("gstRate", TypeName = "decimal(18, 2)")]
     public decimal? GstRate { get; set; }
 
-    [Column("gstAmount", TypeName = "decimal(18, 0)")]
+    [Column("gstAmount", TypeName = "decimal(18, 2)")]
     public decimal? GstAmount { get; set; }
 
-    [Column("totalAmount", TypeName = "decimal(18, 0)")]
+    [Column("totalAmount", TypeName = "decimal(18, 2)")]
     public decimal? TotalAmount { get; set; }
 
     [Column("createdAt", TypeName = "datetime")]
