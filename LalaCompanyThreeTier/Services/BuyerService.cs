@@ -43,7 +43,7 @@ namespace LalaCompanyThreeTier.Services
             await _appDbContext.SaveChangesAsync();
             return buyer;
         }
-        public async Task<Buyer?> UpdateBuyer(int id, Buyer buyer)
+        public async Task<Buyer?> UpdateBuyer(int id, UpdateBuyerDto buyer)
         {
             var existingBuyer = await _appDbContext.Buyers.FindAsync(id);
             if (existingBuyer == null)
