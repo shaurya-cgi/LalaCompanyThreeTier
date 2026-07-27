@@ -62,39 +62,26 @@ public class BuyersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutBuyer(int? id, UpdateBuyerDto dto)
+    public async Task<IActionResult> PutBuyer(int id, UpdateBuyerDto dto)
     {
-        var buyer = new Buyer
-        {
-            PartyName = dto.PartyName,
-            Gstin = dto.Gstin,
-            Mobile = dto.Mobile,
-            Email = dto.Email,
-            BillingAddress = dto.BillingAddress,
-            State = dto.State,
-            City = dto.City,
-            PinCode = dto.PinCode,
-            UpdatedAt = dto.UpdatedAt
-        };
-        var _ = await _context.Buyers.FindAsync(id);
+        var buyer = await _context.Buyers.FindAsync(id);
 
-        _context.Entry(buyer).State = EntityState.Modified;
+        if (buyer == null)
+        {
+            return NotFound();
+        }
 
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!BuyerExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+        buyer.PartyName = dto.PartyName;
+        buyer.Gstin = dto.Gstin;
+        buyer.Mobile = dto.Mobile;
+        buyer.Email = dto.Email;
+        buyer.BillingAddress = dto.BillingAddress;
+        buyer.State = dto.State;
+        buyer.City = dto.City;
+        buyer.PinCode = dto.PinCode;
+        buyer.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
