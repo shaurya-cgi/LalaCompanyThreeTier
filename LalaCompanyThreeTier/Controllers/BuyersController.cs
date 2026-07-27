@@ -16,7 +16,6 @@ public class BuyersController : ControllerBase
     }
 
     [HttpGet]
-    [HttpGet]
     public async Task<IActionResult> GetBuyer()
     {
         var buyers = await _context.Buyers

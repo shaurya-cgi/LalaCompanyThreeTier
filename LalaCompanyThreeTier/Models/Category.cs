@@ -15,7 +15,7 @@ public partial class Category
 
     [Column("name")]
     [StringLength(255)]
-    public string? Name { get; set; }
+    public string? CategoryName { get; set; }
 
     [Column("description", TypeName = "text")]
     public string? Description { get; set; }
