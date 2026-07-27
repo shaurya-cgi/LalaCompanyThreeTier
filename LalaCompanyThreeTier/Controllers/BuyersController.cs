@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using LalaCompanyThreeTier.Models;
 using LalaCompanyThreeTier.Data;
 using LalaCompanyThreeTier.Dtos.Buyer;
+using System.Net;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -15,13 +16,28 @@ public class BuyersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Buyer>>> GetBuyer()
+    [HttpGet]
+    public async Task<IActionResult> GetBuyer()
     {
-        return await _context.Buyers.ToListAsync();
+        var buyers = await _context.Buyers
+            .Select(b => new
+            {
+                b.Id,
+                b.PartyName,
+                b.Gstin,
+                b.Mobile,
+                b.Email,
+                b.City,
+                b.State,
+                b.PinCode
+            })
+            .ToListAsync();
+
+        return Ok(buyers);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Buyer>> GetBuyer(int id)
+    public async Task<ActionResult<BuyerResponseDto>> GetBuyer(int id)
     {
         var buyer = await _context.Buyers.FindAsync(id);
 
@@ -30,16 +46,37 @@ public class BuyersController : ControllerBase
             return NotFound();
         }
 
-        return buyer;
+        var dto = new BuyerResponseDto
+        {
+            Id = buyer.Id,
+            PartyName = buyer.PartyName,
+            Gstin = buyer.Gstin,
+            Mobile = buyer.Mobile,
+            Email = buyer.Email,
+            State = buyer.State,
+            City = buyer.City,
+            PinCode = buyer.PinCode
+        };
+
+        return Ok(dto);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutBuyer(int? id, Buyer buyer)
+    public async Task<IActionResult> PutBuyer(int? id, UpdateBuyerDto dto)
     {
-        if (id != buyer.Id)
+        var buyer = new Buyer
         {
-            return BadRequest();
-        }
+            PartyName = dto.PartyName,
+            Gstin = dto.Gstin,
+            Mobile = dto.Mobile,
+            Email = dto.Email,
+            BillingAddress = dto.BillingAddress,
+            State = dto.State,
+            City = dto.City,
+            PinCode = dto.PinCode,
+            UpdatedAt = dto.UpdatedAt
+        };
+        var _ = await _context.Buyers.FindAsync(id);
 
         _context.Entry(buyer).State = EntityState.Modified;
 
