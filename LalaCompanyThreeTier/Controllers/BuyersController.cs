@@ -27,6 +27,7 @@ public class BuyersController : ControllerBase
                 b.Gstin,
                 b.Mobile,
                 b.Email,
+                b.BillingAddress,
                 b.City,
                 b.State,
                 b.PinCode
