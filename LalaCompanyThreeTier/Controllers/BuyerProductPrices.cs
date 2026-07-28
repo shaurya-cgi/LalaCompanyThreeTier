@@ -170,8 +170,7 @@ public class BuyerProductPricesController : ControllerBase
         var entity = await _context.BuyerProductPrices
             .FindAsync(id);
 
-        if (entity == null)
-        {
+        if (entity == null){
             return NotFound();
         }
 
