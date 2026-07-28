@@ -38,6 +38,22 @@ public class InvoiceController : ControllerBase
         return Ok(invoices);
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<InvoiceResponseDto>> GetInvoiceById(int id)
+    {
+        var invoice = await _dbContext.Invoices
+            .Include(i => i.Buyer)
+            .Include(i => i.InvoiceItems)
+            .FirstOrDefaultAsync(i => i.Id == id);
+
+        if (invoice == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(invoice);
+    }
+
     [HttpPost]
     public async Task<ActionResult<InvoiceResponseDto>> PostInvoice(CreateInvoiceDto dto)
     {
