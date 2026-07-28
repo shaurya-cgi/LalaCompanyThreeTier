@@ -27,6 +27,14 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 var app = builder.Build();
 
+builder.Configuration
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile(
+        $"appsettings.{builder.Environment.EnvironmentName}.json",
+        true
+    )
+    .AddEnvironmentVariables();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
