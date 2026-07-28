@@ -25,7 +25,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish --configuration Release --output publish
+        run: dotnet publish LalaCompanyThreeTier/LalaCompanyThreeTier.csproj --configuration Release --output publish
 
       - name: Copy Files To EC2
         uses: appleboy/scp-action@v0.1.7
@@ -35,6 +35,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "publish/*"
           target: "/home/ec2-user/lala-api"
+          strip_components: 1
+          overwrite: true
 
       - name: Restart API Service
         uses: appleboy/ssh-action@v1.2.0
